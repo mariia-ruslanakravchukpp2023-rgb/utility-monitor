@@ -154,27 +154,6 @@ th {
   color: #0f766e;
 }
 
-@media (max-width: 900px) {
-  nav {
-    flex-direction: column;
-    gap: 15px;
-  }
-
-  .grid,
-  .grid.four {
-    grid-template-columns: 1fr;
-  }
-
-  nav a {
-    display: inline-block;
-    margin: 6px;
-  }
-
-  table {
-    font-size: 13px;
-  }
-}
-
 @media (max-width: 600px) {
   nav {
     padding: 18px 10px;
@@ -192,12 +171,18 @@ th {
     gap: 10px;
   }
 
+  nav a {
+    padding: 10px 14px;
+    background: rgba(255,255,255,0.12);
+    border-radius: 8px;
+  }
+
   .hero {
-    padding: 50px 15px;
+    padding: 25px 15px;
   }
 
   .hero h1 {
-    font-size: 30px;
+    font-size: 34px;
   }
 
   .hero p {
@@ -218,12 +203,14 @@ th {
   }
 
   h1 {
-    font-size: 30px;
+    font-size: 34px;
   }
 
   button,
   .btn {
     width: 100%;
+    padding: 16px;
+    font-size: 17px;
   }
 
   table {
