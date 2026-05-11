@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <title>Аналітика</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body onload="loadAnalytics()">
+  <nav>
+    <h2>Utility Monitor</h2>
+    <div>
+      <a href="dashboard.html">Кабінет</a>
+      <a href="add-reading.html">Додати показник</a>
+      <a href="history.html">Історія</a>
+      <a href="tips.html">Поради</a>
+    </div>
+  </nav>
+
+  <main class="container">
+    <h1>Аналітика витрат</h1>
+
+    <section class="grid four">
+      <div class="stat-card">
+        <h3>Електроенергія</h3>
+        <p><span id="electricityTotal">0</span> грн</p>
+      </div>
+
+      <div class="stat-card">
+        <h3>Вода</h3>
+        <p><span id="waterTotal">0</span> грн</p>
+      </div>
+
+      <div class="stat-card">
+        <h3>Газ</h3>
+        <p><span id="gasTotal">0</span> грн</p>
+      </div>
+
+      <div class="stat-card">
+        <h3>Опалення</h3>
+        <p><span id="heatingTotal">0</span> грн</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Висновок системи</h2>
+      <p id="analyticsConclusion">Дані ще не завантажені.</p>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>

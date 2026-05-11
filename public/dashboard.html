@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <title>Кабінет</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body onload="loadDashboard()">
+  <nav>
+    <h2>Utility Monitor</h2>
+    <div>
+      <a href="dashboard.html">Кабінет</a>
+      <a href="add-reading.html">Додати показник</a>
+      <a href="history.html">Історія</a>
+      <a href="analytics.html">Аналітика</a>
+      <a href="tips.html">Поради</a>
+      <a href="/api/auth/logout">Вийти</a>
+    </div>
+  </nav>
+
+  <main class="container">
+    <h1>Особистий кабінет</h1>
+    <p id="userInfo"></p>
+
+    <section class="grid">
+      <div class="stat-card">
+        <h3>Загальна сума</h3>
+        <p><span id="dashTotal">0</span> грн</p>
+      </div>
+
+      <div class="stat-card">
+        <h3>Кількість записів</h3>
+        <p><span id="dashCount">0</span></p>
+      </div>
+
+      <div class="stat-card">
+        <h3>Найдорожча послуга</h3>
+        <p id="dashMax">—</p>
+      </div>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <title>Додати показник</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body onload="checkUser()">
+  <nav>
+    <h2>Utility Monitor</h2>
+    <div>
+      <a href="dashboard.html">Кабінет</a>
+      <a href="history.html">Історія</a>
+      <a href="analytics.html">Аналітика</a>
+      <a href="tips.html">Поради</a>
+    </div>
+  </nav>
+
+  <main class="form-page">
+    <section class="card">
+      <h1>Додати показник</h1>
+
+      <select id="utilityType">
+        <option value="Електроенергія">Електроенергія</option>
+        <option value="Вода">Вода</option>
+        <option value="Газ">Газ</option>
+        <option value="Опалення">Опалення</option>
+      </select>
+
+      <input type="number" id="value" placeholder="Споживання">
+      <input type="number" id="price" placeholder="Ціна за одиницю">
+
+      <button onclick="addReading()">Додати</button>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>

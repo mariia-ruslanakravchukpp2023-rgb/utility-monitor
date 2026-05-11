@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <title>Історія</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body onload="loadHistory()">
+  <nav>
+    <h2>Utility Monitor</h2>
+    <div>
+      <a href="dashboard.html">Кабінет</a>
+      <a href="add-reading.html">Додати показник</a>
+      <a href="analytics.html">Аналітика</a>
+      <a href="tips.html">Поради</a>
+    </div>
+  </nav>
+
+  <main class="container">
+    <h1>Історія показників</h1>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Тип</th>
+          <th>Споживання</th>
+          <th>Ціна</th>
+          <th>Сума</th>
+          <th>Дата</th>
+          <th>Дія</th>
+        </tr>
+      </thead>
+      <tbody id="readingsTable"></tbody>
+    </table>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
