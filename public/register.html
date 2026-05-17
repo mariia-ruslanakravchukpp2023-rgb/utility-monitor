@@ -6,29 +6,72 @@
   <title>Реєстрація</title>
   <link rel="stylesheet" href="style.css">
 </head>
-<body>
+
+<body class="register-page">
+
   <nav>
     <h2>Utility Monitor</h2>
+
     <div>
       <a href="index.html">Головна</a>
       <a href="login.html">Вхід</a>
     </div>
   </nav>
 
+  <button class="menu-btn" onclick="toggleMenu()">
+    ☰
+  </button>
+
+  <div id="sideMenu" class="side-menu">
+    <a href="index.html">🏠 Головна</a>
+    <a href="about.html">ℹ️ Про систему</a>
+    <a href="login.html">🔑 Вхід</a>
+    <a href="register.html">👤 Реєстрація</a>
+  </div>
+
   <main class="form-page">
+
     <section class="card">
+
       <h1>Реєстрація</h1>
 
-      <input type="text" id="regName" placeholder="Ім'я">
-      <input type="email" id="regEmail" placeholder="Email">
-      <input type="password" id="regPassword" placeholder="Пароль">
+      <input
+        type="text"
+        id="regName"
+        placeholder="Ім'я"
+        autocomplete="off"
+      >
 
-      <button onclick="register()">Зареєструватися</button>
+      <input
+        type="email"
+        id="regEmail"
+        placeholder="Email"
+        autocomplete="off"
+      >
 
-      <p>Вже маєте акаунт? <a href="login.html">Увійти</a></p>
+      <input
+        type="password"
+        id="regPassword"
+        placeholder="Пароль"
+        autocomplete="new-password"
+      >
+
+      <button onclick="register()">
+        Зареєструватися
+      </button>
+
+      <p>
+        Вже маєте акаунт?
+        <a href="login.html">
+          Увійти
+        </a>
+      </p>
+
     </section>
+
   </main>
 
   <script src="script.js"></script>
+
 </body>
 </html>

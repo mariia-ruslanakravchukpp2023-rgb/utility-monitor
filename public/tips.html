@@ -6,9 +6,12 @@
   <title>Поради</title>
   <link rel="stylesheet" href="style.css">
 </head>
-<body>
+
+<body class="tips-page">
+
   <nav>
     <h2>Utility Monitor</h2>
+
     <div>
       <a href="dashboard.html">Кабінет</a>
       <a href="add-reading.html">Додати показник</a>
@@ -17,28 +20,68 @@
     </div>
   </nav>
 
+  <button class="menu-btn" onclick="toggleMenu()">
+    ☰
+  </button>
+
+  <div id="sideMenu" class="side-menu">
+    <a href="dashboard.html">🏠 Кабінет</a>
+    <a href="add-reading.html">➕ Додати показник</a>
+    <a href="history.html">📋 Історія</a>
+    <a href="analytics.html">📊 Аналітика</a>
+    <a href="tips.html">💡 Поради</a>
+    <a href="/api/auth/logout">🚪 Вийти</a>
+  </div>
+
   <main class="container">
+
     <h1>Поради з економії</h1>
 
     <section class="card">
       <h3>Електроенергія</h3>
-      <p>Вимикайте прилади з розетки, використовуйте LED-лампи та не залишайте світло увімкненим без потреби.</p>
+
+      <p>
+        Вимикайте прилади з розетки,
+        використовуйте LED-лампи та
+        не залишайте світло увімкненим
+        без потреби.
+      </p>
     </section>
 
     <section class="card">
       <h3>Вода</h3>
-      <p>Слідкуйте за протіканнями, встановіть економні насадки та закривайте воду під час чищення зубів.</p>
+
+      <p>
+        Слідкуйте за протіканнями,
+        встановіть економні насадки
+        та закривайте воду під час
+        чищення зубів.
+      </p>
     </section>
 
     <section class="card">
       <h3>Газ</h3>
-      <p>Використовуйте кришки під час готування та перевіряйте справність газового обладнання.</p>
+
+      <p>
+        Використовуйте кришки під час
+        готування та перевіряйте
+        справність газового обладнання.
+      </p>
     </section>
 
     <section class="card">
       <h3>Опалення</h3>
-      <p>Утеплюйте вікна, не закривайте батареї меблями та регулюйте температуру в кімнатах.</p>
+
+      <p>
+        Утеплюйте вікна, не закривайте
+        батареї меблями та регулюйте
+        температуру в кімнатах.
+      </p>
     </section>
+
   </main>
+
+  <script src="script.js"></script>
+
 </body>
 </html>

@@ -242,3 +242,8 @@ async function loadAnalytics() {
       ? `Найбільші витрати зараз припадають на: ${maxName}. Рекомендується звернути увагу на цю категорію для економії.`
       : "Поки що немає достатньо даних для аналізу.";
 }
+function toggleMenu() {
+  document
+    .getElementById("sideMenu")
+    .classList.toggle("show-menu");
+}

@@ -6,9 +6,12 @@
   <title>Історія</title>
   <link rel="stylesheet" href="style.css">
 </head>
-<body onload="loadHistory()">
+
+<body class="history-page" onload="loadHistory()">
+
   <nav>
     <h2>Utility Monitor</h2>
+
     <div>
       <a href="dashboard.html">Кабінет</a>
       <a href="add-reading.html">Додати показник</a>
@@ -17,7 +20,21 @@
     </div>
   </nav>
 
+  <button class="menu-btn" onclick="toggleMenu()">
+    ☰
+  </button>
+
+  <div id="sideMenu" class="side-menu">
+    <a href="dashboard.html">🏠 Кабінет</a>
+    <a href="add-reading.html">➕ Додати показник</a>
+    <a href="history.html">📋 Історія</a>
+    <a href="analytics.html">📊 Аналітика</a>
+    <a href="tips.html">💡 Поради</a>
+    <a href="/api/auth/logout">🚪 Вийти</a>
+  </div>
+
   <main class="container">
+
     <h1>Історія показників</h1>
 
     <table>
@@ -31,10 +48,13 @@
           <th>Дія</th>
         </tr>
       </thead>
+
       <tbody id="readingsTable"></tbody>
     </table>
+
   </main>
 
   <script src="script.js"></script>
+
 </body>
 </html>

@@ -6,7 +6,9 @@
   <title>Аналітика</title>
   <link rel="stylesheet" href="style.css">
 </head>
-<body onload="loadAnalytics()">
+
+<body class="analytics-page" onload="loadAnalytics()">
+
   <nav>
     <h2>Utility Monitor</h2>
     <div>
@@ -16,6 +18,19 @@
       <a href="tips.html">Поради</a>
     </div>
   </nav>
+
+  <button class="menu-btn" onclick="toggleMenu()">
+    ☰
+  </button>
+
+  <div id="sideMenu" class="side-menu">
+    <a href="dashboard.html">🏠 Кабінет</a>
+    <a href="add-reading.html">➕ Додати показник</a>
+    <a href="history.html">📋 Історія</a>
+    <a href="analytics.html">📊 Аналітика</a>
+    <a href="tips.html">💡 Поради</a>
+    <a href="/api/auth/logout">🚪 Вийти</a>
+  </div>
 
   <main class="container">
     <h1>Аналітика витрат</h1>
