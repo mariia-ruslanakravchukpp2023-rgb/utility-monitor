@@ -64,6 +64,36 @@
 
     </section>
 
+    <section class="card">
+
+      <h2>Налаштування рекомендацій</h2>
+
+      <label>Наявність додаткових систем економії</label>
+
+      <select id="hasBoiler">
+        <option value="false">Бойлер не встановлений</option>
+        <option value="true">Є бойлер</option>
+      </select>
+
+      <select id="hasDualZoneMeter">
+        <option value="false">Немає двозонного лічильника</option>
+        <option value="true">Є двозонний лічильник</option>
+      </select>
+
+      <label>Кількість мешканців</label>
+
+      <input
+        type="number"
+        id="peopleCount"
+        min="1"
+      >
+
+      <button onclick="saveRecommendationSettings()">
+        Зберегти налаштування
+      </button>
+
+    </section>
+
   </main>
 
   <script src="script.js"></script>

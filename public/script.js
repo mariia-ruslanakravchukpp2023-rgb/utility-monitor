@@ -152,6 +152,11 @@ async function loadDashboard() {
   document.getElementById("userInfo").innerText =
     `Користувач: ${user.name} (${user.email})`;
 
+  document.getElementById("hasBoiler").value = String(user.hasBoiler);
+  document.getElementById("hasDualZoneMeter").value =
+    String(user.hasDualZoneMeter);
+  document.getElementById("peopleCount").value = user.peopleCount || 1;
+
   const response = await fetch(`/api/readings/${user.email}`);
   const readings = await response.json();
 
@@ -180,6 +185,37 @@ async function loadDashboard() {
   document.getElementById("dashTotal").innerText = total.toFixed(2);
   document.getElementById("dashCount").innerText = readings.length;
   document.getElementById("dashMax").innerText = maxType;
+}
+
+async function saveRecommendationSettings() {
+  const hasBoiler =
+    document.getElementById("hasBoiler").value === "true";
+
+  const hasDualZoneMeter =
+    document.getElementById("hasDualZoneMeter").value === "true";
+
+  const peopleCount =
+    Number(document.getElementById("peopleCount").value);
+
+  if (!peopleCount || peopleCount < 1) {
+    alert("Введіть коректну кількість мешканців");
+    return;
+  }
+
+  const response = await fetch("/api/auth/settings", {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      hasBoiler,
+      hasDualZoneMeter,
+      peopleCount
+    })
+  });
+
+  const data = await response.json();
+  alert(data.message);
 }
 
 async function loadAnalytics() {
@@ -215,33 +251,141 @@ async function loadAnalytics() {
     }
   });
 
-  document.getElementById("electricityTotal").innerText = electricity.toFixed(2);
+  document.getElementById("electricityTotal").innerText =
+    electricity.toFixed(2);
   document.getElementById("waterTotal").innerText = water.toFixed(2);
   document.getElementById("gasTotal").innerText = gas.toFixed(2);
   document.getElementById("heatingTotal").innerText = heating.toFixed(2);
 
-  const totals = {
-    "електроенергія": electricity,
-    "вода": water,
-    "газ": gas,
-    "опалення": heating
-  };
+  const electricityTariff = 4.32;
+  const boilerKwhPerPerson = 120;
 
-  let maxName = "немає даних";
-  let maxValue = 0;
+  const costWithoutBoiler = water;
 
-  for (const name in totals) {
-    if (totals[name] > maxValue) {
-      maxValue = totals[name];
-      maxName = name;
-    }
+  const costWithBoiler =
+    water * 0.5 +
+    user.peopleCount * boilerKwhPerPerson * electricityTariff;
+
+  const boilerSaving =
+    costWithoutBoiler - costWithBoiler;
+
+  const costWithoutDualZone = electricity;
+
+
+
+const nightUsagePercent =
+  0.2 + user.peopleCount * 0.05;
+
+const safeNightPercent =
+  Math.min(nightUsagePercent, 0.6);
+
+const costWithDualZone =
+  electricity * (1 - safeNightPercent) +
+  electricity * safeNightPercent * 0.5;
+
+const dualZoneSaving =
+  costWithoutDualZone - costWithDualZone;
+
+
+
+const heatingEfficiency =
+  0.1 + user.peopleCount * 0.02;
+
+const safeHeatingEfficiency =
+  Math.min(heatingEfficiency, 0.25);
+
+const heatingSaving =
+  heating * safeHeatingEfficiency;
+
+
+
+const gasEfficiency =
+  0.12 + user.peopleCount * 0.02;
+
+const safeGasEfficiency =
+  Math.min(gasEfficiency, 0.3);
+
+const gasSaving =
+  gas * safeGasEfficiency;
+
+  let recommendations = [];
+
+  if (readings.length === 0) {
+    recommendations.push(
+      "Поки що немає достатньо даних для аналізу. Додайте показники комунальних послуг."
+    );
+  }
+
+  if (
+    !user.hasBoiler &&
+    water > 1000 &&
+    boilerSaving > 500
+  ) {
+    recommendations.push(
+      `Вода: система порівняла витрати без бойлера та з бойлером.
+
+Витрати без бойлера: ${costWithoutBoiler.toFixed(2)} грн.
+Орієнтовні витрати з бойлером: ${costWithBoiler.toFixed(2)} грн.
+Можлива економія: ${boilerSaving.toFixed(2)} грн.
+
+Рекомендація: встановлення бойлера може бути економічно вигідним.`
+    );
+  }
+
+  if (
+    !user.hasDualZoneMeter &&
+    electricity > 1000 &&
+    dualZoneSaving > 300
+  ) {
+    recommendations.push(
+      `Електроенергія: система порівняла звичайний тариф і двозонний лічильник.
+
+Витрати без двозонного лічильника: ${costWithoutDualZone.toFixed(2)} грн.
+Орієнтовні витрати з двозонним лічильником: ${costWithDualZone.toFixed(2)} грн.
+Можлива економія: ${dualZoneSaving.toFixed(2)} грн.
+
+Рекомендація: встановлення двозонного лічильника може бути економічно вигідним.`
+    );
+  }
+
+  if (
+    heating > 4000 &&
+    heatingSaving > 500
+  ) {
+    recommendations.push(
+      `Опалення: система визначила високі витрати.
+
+Поточні витрати на опалення: ${heating.toFixed(2)} грн.
+Орієнтовна можлива економія після встановлення терморегуляторів: ${heatingSaving.toFixed(2)} грн.
+
+Рекомендація: варто розглянути встановлення терморегуляторів або утеплення вікон.`
+    );
+  }
+
+  if (
+    gas > 3500 &&
+    gasSaving > 500
+  ) {
+    recommendations.push(
+      `Газ: система визначила високі витрати.
+
+Поточні витрати на газ: ${gas.toFixed(2)} грн.
+Орієнтовна можлива економія після перевірки або оновлення газового обладнання: ${gasSaving.toFixed(2)} грн.
+
+Рекомендація: варто перевірити ефективність газового обладнання та утеплення приміщення.`
+    );
+  }
+
+  if (recommendations.length === 0) {
+    recommendations.push(
+      "Критичних перевитрат не виявлено ."
+    );
   }
 
   document.getElementById("analyticsConclusion").innerText =
-    maxValue > 0
-      ? `Найбільші витрати зараз припадають на: ${maxName}. Рекомендується звернути увагу на цю категорію для економії.`
-      : "Поки що немає достатньо даних для аналізу.";
+    recommendations.join("\n\n \n\n");
 }
+
 function toggleMenu() {
   document
     .getElementById("sideMenu")

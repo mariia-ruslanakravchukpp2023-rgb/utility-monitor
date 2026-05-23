@@ -12,6 +12,21 @@ const userSchema = new mongoose.Schema({
     unique: true
   },
 
+hasBoiler: {
+  type: Boolean,
+  default: false
+},
+
+peopleCount: {
+  type: Number,
+  default: 1
+},
+
+hasDualZoneMeter: {
+  type: Boolean,
+  default: false
+},
+
   password: {
     type: String,
     required: true

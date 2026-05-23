@@ -70,7 +70,10 @@ router.post("/login", async (req, res) => {
 
     req.session.user = {
       name: user.name,
-      email: user.email
+      email: user.email,
+      hasBoiler: user.hasBoiler,
+      hasDualZoneMeter: user.hasDualZoneMeter,
+      peopleCount: user.peopleCount
     };
 
     res.json({
@@ -94,6 +97,45 @@ router.get("/me", (req, res) => {
   res.json({
     user: req.session.user
   });
+});
+
+router.put("/settings", async (req, res) => {
+  try {
+    if (!req.session.user) {
+      return res.status(401).json({
+        message: "Користувач не авторизований"
+      });
+    }
+
+    const {
+      hasBoiler,
+      hasDualZoneMeter,
+      peopleCount
+    } = req.body;
+
+    const user = await User.findOneAndUpdate(
+      { email: req.session.user.email },
+      {
+        hasBoiler,
+        hasDualZoneMeter,
+        peopleCount
+      },
+      { new: true }
+    );
+
+    req.session.user.hasBoiler = user.hasBoiler;
+    req.session.user.hasDualZoneMeter = user.hasDualZoneMeter;
+    req.session.user.peopleCount = user.peopleCount;
+
+    res.json({
+      message: "Налаштування збережено",
+      user: req.session.user
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: "Помилка збереження налаштувань"
+    });
+  }
 });
 
 router.get("/logout", (req, res) => {
